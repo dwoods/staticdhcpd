@@ -1,3 +1,5 @@
+import os
+
 #Copy this file to one of the following locations, then rename it to conf.py:
 #/etc/staticDHCPd/, ./conf/
 
@@ -20,7 +22,15 @@ GID = 0
 
 #The IP of the interface to use for DHCP traffic
 DHCP_SERVER_IP = '172.17.0.2'
+if os.environ.get('DHCP_SERVER_IP') is not None:
+    DHCP_SERVER_IP = os.environ.get('DHCP_SERVER_IP')
+
 
 #The database-engine to use
 #For details, see the configuration guide in the documentation.
+
 DATABASE_ENGINE = None
+# Since the default is None / null, ignore passing in that string to save logic.
+if (os.environ.get('DATABASE_ENGINE') is not None) and (os.environ.get('DATABASE_ENGINE') is not 'None'):
+    DATABASE_ENGINE = os.environ.get('DATABASE_ENGINE')
+
