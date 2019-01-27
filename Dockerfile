@@ -11,14 +11,8 @@ RUN apt-get -q -y update \
  && apt-get -q -y clean \
  && rm -rf /var/lib/apt/lists/*
  
-#RUN pip -i
-#RUN virtualenv env
-#pip3 install virtualenv
-
 RUN mkdir -p /src
 COPY . /src
-#COPY staticDHCPd /src
-#COPY install.sh /src
 
 RUN cd /src && ./install.sh
 
